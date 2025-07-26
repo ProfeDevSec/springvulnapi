@@ -1,0 +1,58 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.15'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'java'
+    id 'application'
+}
+
+group = 'com.banco.solicitudes'
+version = '1.0.0'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.apache.commons:commons-text:1.10.0'
+    runtimeOnly 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+application {
+    mainClass = 'com.banco.solicitudes.GestorSolicitudesApplication'
+}
+
+tasks.register('buildJar', Jar) {
+    dependsOn build
+    archiveClassifier.set('')
+    from sourceSets.main.output
+    manifest {
+        attributes 'Main-Class': application.mainClass.get()
+    }
+}
+
+tasks.register('runApp', JavaExec) {
+    dependsOn buildJar
+    mainClass.set(application.mainClass.get())
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
+tasks.register('cleanAll') {
+    group = 'build'
+    description = 'Limpia el proyecto y elimina archivos generados'
+    dependsOn clean
+    doLast {
+        delete "build"
+        delete "out"
+    }
+}
+
+
+test {
+    useJUnitPlatform()
+}

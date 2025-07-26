@@ -1,0 +1,20 @@
+version: '3.8' # Versión de Docker Compose
+
+services:
+  gestor-solicitudes-app: # Nombre del servicio para tu aplicación
+    build: . # Le dice a Docker Compose que construya la imagen desde el Dockerfile en el directorio actual
+    container_name: gestor-solicitudes-app # Nombre explícito para el contenedor
+    ports:
+      - "8080:8080" # Mapea el puerto 8080 del host al puerto 8080 del contenedor
+    environment:
+      # Puedes pasar variables de entorno a tu aplicación Spring Boot
+      # Por ejemplo, para activar un perfil específico si lo tienes
+      - SPRING_PROFILES_ACTIVE=docker # Puedes usar 'dev', 'prod', o un perfil 'docker'
+      # Si usaras una DB externa (ej. PostgreSQL), configurarías la URL aquí
+      # - SPRING_DATASOURCE_URL=jdbc:postgresql://nombre_del_servicio_db:5432/nombre_de_la_db
+      # - SPRING_DATASOURCE_USERNAME=usuario_db
+      # - SPRING_DATASOURCE_PASSWORD=password_db
+    # Si tuvieras otros servicios (como una DB externa), los listarías aquí
+    # depends_on:
+    #   - nombre_del_servicio_db # Por ejemplo, 'db'
+    restart: always # Opcional: Reinicia el contenedor si se detiene (útil para producción)
