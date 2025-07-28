@@ -74,6 +74,8 @@ Este proyecto contiene de forma **intencionada** algunas de las siguientes vulne
 | **Endpoint sin validación** | Algunos endpoints aceptan parámetros sin validar su contenido. |
 | **Dependencias desactualizadas** | El sistema puede incluir versiones de librerías con CVEs conocidos. |
 
+Existen más vulnerabilidades que deberás encontrar e identificar...
+
 ---
 
 ## 🎓 Objetivo académico
