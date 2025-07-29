@@ -12,6 +12,7 @@ public class CustomSolicitudRepositoryImpl implements CustomSolicitudRepository 
 
     @Override
     public List<Solicitud> buscarPorNombre(String nombre) {
+        // TODO Aun vulnerable a desarrollar por el estudiante
         String sql = "SELECT * FROM solicitud WHERE nombre_cliente LIKE '%" + nombre + "%'";
         return entityManager.createNativeQuery(sql, Solicitud.class).getResultList();
     }
